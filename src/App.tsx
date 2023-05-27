@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
 
-function App() {
+import CookieManager from "./utils/CookieManager";
+import CookieGetter from "./components/CookieGetter";
+import CookieSetter from "./components/CookieSetter";
+import "./App.css";
+
+const App = () => {
+  useEffect(() => {
+    const initCookieManager = async () => {
+      // initialize cookie manager
+      const cookieManager = new CookieManager();
+      await cookieManager.init();
+    };
+
+    initCookieManager();
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CookieSetter />
+
+      <hr />
+
+      <CookieGetter />
     </div>
   );
-}
+};
 
 export default App;
